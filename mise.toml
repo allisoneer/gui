@@ -1,0 +1,67 @@
+[tool_alias]
+thoughts-bin = "github:allisoneer/agentic_auxilary"
+agentic-bin = "github:allisoneer/agentic_auxilary"
+agentic-mcp = "github:allisoneer/agentic_auxilary"
+opencode-orchestrator-mcp = "github:allisoneer/agentic_auxilary"
+
+
+[settings]
+lockfile = true
+locked = true
+status = { missing_tools = "always" }
+
+[env]
+_.path = ["tools/bin"]
+
+[tools]
+# Provides cargo-binstall so the cargo backend can download pre-built binaries
+# instead of compiling from source. Using github backend for proper lockfile support.
+"github:cargo-bins/cargo-binstall" = "latest"
+claude = "2.1.154"
+"npm:opencode-ai" = "1.15.7"
+# END:xtask:autogen
+just = "latest"
+uv = "latest"
+bun = "1.2.21"
+
+
+[tools.thoughts-bin]
+version = "0.1.19"
+version_prefix = "thoughts-bin-v"
+
+[tools.thoughts-bin.platforms]
+linux-x64 = { asset_pattern = "thoughts-bin-x86_64-unknown-linux-gnu.tar.xz" }
+linux-arm64 = { asset_pattern = "thoughts-bin-aarch64-unknown-linux-gnu.tar.xz" }
+macos-x64 = { asset_pattern = "thoughts-bin-x86_64-apple-darwin.tar.xz" }
+macos-arm64 = { asset_pattern = "thoughts-bin-aarch64-apple-darwin.tar.xz" }
+
+[tools.agentic-bin]
+version = "0.1.8"
+version_prefix = "agentic-bin-v"
+
+[tools.agentic-bin.platforms]
+linux-x64 = { asset_pattern = "agentic-bin-x86_64-unknown-linux-gnu.tar.xz" }
+linux-arm64 = { asset_pattern = "agentic-bin-aarch64-unknown-linux-gnu.tar.xz" }
+macos-x64 = { asset_pattern = "agentic-bin-x86_64-apple-darwin.tar.xz" }
+macos-arm64 = { asset_pattern = "agentic-bin-aarch64-apple-darwin.tar.xz" }
+
+[tools.agentic-mcp]
+version = "0.2.29"
+version_prefix = "agentic-mcp-v"
+
+[tools.agentic-mcp.platforms]
+linux-x64 = { asset_pattern = "agentic-mcp-x86_64-unknown-linux-gnu.tar.xz" }
+linux-arm64 = { asset_pattern = "agentic-mcp-aarch64-unknown-linux-gnu.tar.xz" }
+macos-x64 = { asset_pattern = "agentic-mcp-x86_64-apple-darwin.tar.xz" }
+macos-arm64 = { asset_pattern = "agentic-mcp-aarch64-apple-darwin.tar.xz" }
+
+[tools.opencode-orchestrator-mcp]
+version = "0.6.5"
+version_prefix = "opencode-orchestrator-mcp-v"
+
+[tools.opencode-orchestrator-mcp.platforms]
+linux-x64 = { asset_pattern = "opencode-orchestrator-mcp-x86_64-unknown-linux-gnu.tar.xz" }
+linux-arm64 = { asset_pattern = "opencode-orchestrator-mcp-aarch64-unknown-linux-gnu.tar.xz" }
+macos-x64 = { asset_pattern = "opencode-orchestrator-mcp-x86_64-apple-darwin.tar.xz" }
+macos-arm64 = { asset_pattern = "opencode-orchestrator-mcp-aarch64-apple-darwin.tar.xz" }
+
