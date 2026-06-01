@@ -1,0 +1,265 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "autoupdate": false,
+  "default_agent": "NormalOpenAI",
+  "permission": {
+    "edit": "ask",
+    "write": "ask",
+    "external_directory": "ask"
+  },
+  "tools": {
+    "*": false,
+    "edit": true,
+    "write": true,
+    "read": true,
+    "todowrite": true,
+    "todoread": true,
+    "tools_web_*": false,
+    "tools_cli_*": true,
+    "tools_ask_*": true,
+    "tools_thoughts_*": true,
+    "tools_gh_*": true,
+    "tools_review_*": false
+  },
+  "agent": {
+    "Normal": {
+      "prompt": "{file:./.opencode/sysprompt.md}",
+      "mode": "primary"
+    },
+    "NormalOpenAI": {
+      "prompt": "{file:./.opencode/sysprompt_gpt54.md}",
+      "model": "opencode/gpt-5.4",
+      "mode": "primary"
+    },
+    "OrchestratorClaude": {
+      "prompt": "{file:./.opencode/orchestrator_sysprompt.md}",
+      "model": "anthropic/claude-opus-4-5",
+      "mode": "primary",
+      "permission": {
+        "*": "deny",
+        "orchestrator_*": "allow",
+        "read": "allow",
+        "todowrite": "allow"
+      }
+    },
+    "OrchestratorOpenAI": {
+      "prompt": "{file:./.opencode/orchestrator_sysprompt_gpt54.md}",
+      "model": "openai/gpt-5.5",
+      "mode": "primary",
+      "permission": {
+        "*": "deny",
+        "orchestrator_*": "allow",
+        "read": "allow",
+        "todowrite": "allow"
+      }
+    },
+    "ReviewClaude": {
+      "prompt": "{file:./.opencode/review_sysprompt.md}",
+      "model": "anthropic/claude-opus-4-5",
+      "mode": "primary",
+      "permission": {
+        "*": "deny",
+        "tools_review_*": "allow",
+        "read": "allow",
+        "tools_cli_just_execute": "allow",
+        "tools_cli_ls": "allow",
+        "tools_cli_grep": "allow",
+        "tools_cli_glob": "allow",
+        "tools_thoughts_write_document": "allow",
+        "tools_ask_reasoning_model": "allow"
+      }
+    },
+    "ReviewOpenAI": {
+      "prompt": "{file:./.opencode/review_sysprompt_gpt54.md}",
+      "model": "openai/gpt-5.5",
+      "mode": "primary",
+      "permission": {
+        "*": "deny",
+        "tools_review_*": "allow",
+        "read": "allow",
+        "tools_cli_just_execute": "allow",
+        "tools_cli_ls": "allow",
+        "tools_cli_grep": "allow",
+        "tools_cli_glob": "allow",
+        "tools_thoughts_write_document": "allow",
+        "tools_ask_reasoning_model": "allow"
+      }
+    },
+    "Bash": {
+      "mode": "primary",
+      "permission": {
+        "bash": {
+          "*": "ask",
+          "cd*": "allow",
+          "ls*": "allow",
+          "find*": "allow",
+          "cat*": "allow",
+          "grep*": "allow",
+          "head*": "allow",
+          "tail*": "allow",
+          "echo*": "allow",
+          "wc*": "allow",
+          "tree*": "allow",
+          "jq*": "allow",
+          "gh*": "allow",
+          "pwd": "allow",
+          "which*": "allow",
+          "cargo check*": "allow",
+          "cargo test*": "allow",
+          "cargo run*": "allow",
+          "cargo clippy*": "allow",
+          "cargo fmt*": "allow",
+          "cargo tree": "allow",
+          "cargo metadata": "allow",
+          "cargo --version": "allow",
+          "cargo build*": "allow",
+          "cargo expand*": "allow",
+          "rustc --version": "allow",
+          "rustup show": "allow",
+          "make*": "allow",
+          "just*": "allow",
+          "git status*": "allow",
+          "git add*": "allow",
+          "git log*": "allow",
+          "git diff*": "allow",
+          "git branch*": "allow",
+          "git remote -v": "allow",
+          "git show*": "allow",
+          "git blame*": "allow",
+          "git grep*": "allow",
+          "aws s3 ls*": "allow",
+          "aws ec2 describe-*": "allow",
+          "aws lambda list-*": "allow",
+          "aws cloudformation describe-*": "allow",
+          "aws --version": "allow",
+          "aws configure list*": "allow",
+          "tofu validate*": "allow",
+          "tofu plan*": "allow",
+          "tofu fmt*": "allow",
+          "tfsec*": "allow"
+        }
+      }
+    },
+    "Playwright": {
+      "prompt": "{file:./.opencode/sysprompt.md}",
+      "mode": "primary",
+      "permission": {
+        "playwright_*": "allow"
+      }
+    },
+    "Linear": {
+      "permission": {
+        "tools_linear_*": "allow"
+      }
+    },
+    "build": {
+      "disable": true
+    },
+    "plan": {
+      "disable": true
+    },
+    "general": {
+      "disable": true
+    },
+    "explore": {
+      "disable": true
+    }
+  },
+  "mcp": {
+    "tools": {
+      "type": "local",
+      "command": [
+        "agentic-mcp"
+      ],
+      "enabled": true
+    },
+    "orchestrator": {
+      "type": "local",
+      "command": [
+        "opencode-orchestrator-mcp"
+      ],
+      "enabled": true
+    },
+    "playwright": {
+      "type": "local",
+      "command": [
+        "npx",
+        "@playwright/mcp@latest"
+      ],
+      "enabled": true
+    }
+  },
+  "provider": {
+    "anthropic": {
+      "models": {
+        "claude-opus-4-5": {
+          "options": {
+            "thinking": {
+              "type": "enabled",
+              "budgetTokens": 32000
+            }
+          },
+          "variants": {
+            "high": {
+              "thinking": {
+                "type": "enabled",
+                "budgetTokens": 48000
+              }
+            },
+            "max": {
+              "thinking": {
+                "type": "enabled",
+                "budgetTokens": 64000
+              }
+            }
+          }
+        },
+        "claude-opus-4-5-20251101": {
+          "options": {
+            "thinking": {
+              "type": "enabled",
+              "budgetTokens": 32000
+            }
+          },
+          "variants": {
+            "high": {
+              "thinking": {
+                "type": "enabled",
+                "budgetTokens": 48000
+              }
+            },
+            "max": {
+              "thinking": {
+                "type": "enabled",
+                "budgetTokens": 64000
+              }
+            }
+          }
+        }
+      }
+    },
+    "github-copilot": {
+      "models": {
+        "claude-opus-4.5": {
+          "options": {
+            "thinking_budget": 31999
+          },
+          "variants": {
+            "thinking": {
+              "disabled": true
+            },
+            "medium": {
+              "thinking_budget": 16000
+            },
+            "max": {
+              "thinking_budget": 31999
+            }
+          }
+        }
+      }
+    }
+  },
+  "experimental": {
+    "mcp_timeout": 7200000
+  }
+}
